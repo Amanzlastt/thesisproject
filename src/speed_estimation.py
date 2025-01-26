@@ -40,19 +40,12 @@ red_line_y = 198
 blue_line_y = 268
 offset = 6
 
-# Create a folder to save frames
-if not os.path.exists('detected_frames'):
-    os.makedirs('detected_frames')
-
-fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('output.avi', fourcc, 20.0, (1020, 500))
-
 while True:
     ret, frame = cap.read()
     if not ret:
         break
     count += 1
-    if count % 3 != 0:
+    if count % 4 != 0:
         continue
     frame = cv2.resize(frame, (1020, 500))
 
@@ -71,10 +64,10 @@ while True:
         c = class_list[d]
         if 'car' in c or 'truck' in c:
             list.append([x1, y1, x2, y2])
-    bbox_id = tracker.update(list)
+    bounding_box_id = tracker.update(list)
 
-    for bbox in bbox_id:
-        x3, y3, x4, y4, id = bbox
+    for bounding_box in bounding_box_id:
+        x3, y3, x4, y4, id = bounding_box
         cx = int(x3 + x4) // 2
         cy = int(y3 + y4) // 2
 
@@ -153,7 +146,6 @@ while True:
         break
 
 cap.release()
-out.release()
 cv2.destroyAllWindows()
 
 
