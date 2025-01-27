@@ -13,7 +13,11 @@ except ImportError :
     print('Import not done')
 
 
+violation_folder = 'C:\\Users\\Aman\\Desktop\\thesisproject\\violators'
 
+# Ensure the directory exists
+if not os.path.exists(violation_folder):
+    os.makedirs(violation_folder)
 
 import cv2
 import pandas as pd
@@ -35,14 +39,14 @@ counter_up = []
 
 red_line_y = 198
 blue_line_y = 268
-offset = 6
+offset = 12
 
 while True:
     ret, frame = cap.read()
     if not ret:
         break
     count += 1
-    if count % 3!= 0:
+    if count % 4!= 0:
         continue
     frame = cv2.resize(frame, (1020, 500))
 
@@ -90,7 +94,8 @@ while True:
                     cv2.putText(frame,str(int(a_speed_kh))+'Km/h',(x4,y4 ),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,255,255),2)
                     filename = datetime.now().strftime('%Y-%m-%d%H%M%S')
                     print(filename, type(filename))
-                    cv2.imwrite(f'{filename}.jpg', frame)
+                    cv2.imwrite(os.path.join(violation_folder, f'{filename}.jpg'), frame)
+                    # cv2.imwrite(f'{filename}.jpg', frame)
                     print("printing")
         #####going UP blue line#####     
         if blue_line_y<(cy+offset) and blue_line_y > (cy-offset):
@@ -115,7 +120,8 @@ while True:
                     cv2.putText(frame,str(id),(x3,y3),cv2.FONT_HERSHEY_COMPLEX,0.6,(255,255,255),1)
                     cv2.putText(frame,str(int(a_speed_kh1))+'Km/h',(x4,y4 ),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,0,255),2)
                     filename = datetime.now().strftime('%Y-%m-%d%H%M%S')
-                    cv2.imwrite(f'{filename}.jpg', frame)
+                    cv2.imwrite(os.path.join(violation_folder, f'{filename}.jpg'), frame)
+                    # cv2.imwrite(f'{filename}.jpg', frame)
 
 
 
