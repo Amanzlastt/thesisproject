@@ -22,14 +22,11 @@ from tracker import*
 
 model=YOLO('yolov8n.pt')
 
-class_list = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 
-              'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
-
+class_list = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light']
 tracker=Tracker()
 count=0
 
 cap=cv2.VideoCapture('C:\\Users\\Aman\\Desktop\\thesisproject\\video\\highway (1).mp4')
-
 
 down = {}
 up = {}
@@ -45,7 +42,7 @@ while True:
     if not ret:
         break
     count += 1
-    if count % 4 != 0:
+    if count % 3!= 0:
         continue
     frame = cv2.resize(frame, (1020, 500))
 
@@ -109,14 +106,14 @@ while True:
                 a_speed_ms1 = distance1 / elapsed1_time
                 a_speed_kh1 = a_speed_ms1 * 3.6
                 cv2.circle(frame,(cx,cy),4,(0,0,255),-1)
-                if a_speed_kh <= 30:
+                if a_speed_kh1 <= 30:
                     cv2.rectangle(frame, (x3, y3), (x4, y4), (0, 255, 0), 2)  # Draw bounding box
                     cv2.putText(frame,str(id),(x3,y3),cv2.FONT_HERSHEY_COMPLEX,0.6,(255,255,255),1)
-                    cv2.putText(frame,str(int(a_speed_kh))+'Km/h',(x4,y4 ),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,255,255),2)
+                    cv2.putText(frame,str(int(a_speed_kh1))+'Km/h',(x4,y4 ),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,255,255),2)
                 else :
                     cv2.rectangle(frame, (x3, y3), (x4, y4), (0, 0,255), 2)  # Draw bounding box
                     cv2.putText(frame,str(id),(x3,y3),cv2.FONT_HERSHEY_COMPLEX,0.6,(255,255,255),1)
-                    cv2.putText(frame,str(int(a_speed_kh))+'Km/h',(x4,y4 ),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,0,255),2)
+                    cv2.putText(frame,str(int(a_speed_kh1))+'Km/h',(x4,y4 ),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,0,255),2)
                     filename = datetime.now().strftime('%Y-%m-%d%H%M%S')
                     cv2.imwrite(f'{filename}.jpg', frame)
 
@@ -149,3 +146,48 @@ cap.release()
 cv2.destroyAllWindows()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import pickle
+# from ultralytics import YOLO
+# from tracker import Tracker
+
+# # Initialize model and tracker
+# model = YOLO('yolov8n.pt')
+# tracker = Tracker()
+
+# # Save configurations
+# configurations = {
+#     "class_list": ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck'],
+#     "red_line_y": 198,
+#     "blue_line_y": 268,
+#     "offset": 6
+# }
+
+# # Save to file
+# with open("model_and_tracker.pkl", "wb") as f:
+#     pickle.dump({"model": model, "tracker": tracker, "configurations": configurations}, f)
+
+# # print("Model and tracker saved to model_and_tracker.pkl")
