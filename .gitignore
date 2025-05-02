@@ -2,3 +2,5 @@
 video/
 detected_frames/
 violators/
+car_image/
+extracted_frames/

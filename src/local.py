@@ -26,7 +26,7 @@ class_list = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'trai
 tracker=Tracker()
 count=0
 
-cap=cv2.VideoCapture('video/traffic7.mp4')
+cap=cv2.VideoCapture('video/highway (1).mp4')
 down={}
 
 while True:
