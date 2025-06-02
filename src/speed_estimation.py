@@ -30,7 +30,7 @@ class_list = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'trai
 tracker=Tracker()
 count=0
 
-cap=cv2.VideoCapture('C:\\Users\\Aman\\Desktop\\thesisproject\\video\\plate1.mp4')
+cap=cv2.VideoCapture('C:\\Users\\Aman\\Desktop\\thesisproject\\video\\highway (1).mp4')
 
 down = {}
 up = {}
