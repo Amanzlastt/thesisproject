@@ -4,10 +4,10 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'received_images'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'received_images')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# ✅ Register this function as a route
 @app.route('/upload', methods=['POST'])
 def upload_image():
     if 'image' not in request.files:
@@ -17,11 +17,6 @@ def upload_image():
     if file.filename == '':
         return jsonify({'error': 'No file selected'}), 400
 
-    # # ✅ Check that it's an image
-    # if not file.content_type.startswith('image/'):
-    #     return jsonify({'error': 'Uploaded file is not an image'}), 400
-
-    # Save the file
     filename = datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
     filepath = os.path.join(UPLOAD_FOLDER, filename)
     file.save(filepath)
